@@ -1,80 +1,132 @@
-# Medical Insurance Cost Analysis
+# 💳 Medical Insurance Cost Analysis
 
-An exploratory data analysis (EDA) and preprocessing project using a medical insurance dataset. It examines how age, BMI, smoking status, family size, sex, and region relate to insurance charges.
+> **A visual, notebook-based exploration of what moves medical insurance charges.**
 
-> **Project status:** learning / exploratory analysis. This repository does not contain a trained or evaluated prediction model. The notebook currently ends during feature-selection analysis.
+This project uses Python to explore a classic insurance dataset and prepare its features for analysis. Follow the charts from the first look at the data through cleaning, feature engineering, scaling, and statistical feature checks.
 
-## Project at a glance
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Notebook-Jupyter-F37626?logo=jupyter&logoColor=white)
+![Focus](https://img.shields.io/badge/Focus-Exploratory%20Data%20Analysis-7C3AED)
 
-- **Rows:** 1,338 in the original CSV; the notebook removes one duplicate row during cleaning.
-- **Features:** 6 input fields plus the continuous target, `charges`.
-- **Notebook:** `medical_insurance_cost_analysis.ipynb`
-- **Dataset:** `insurance.csv`
-- **Methods explored:** summary statistics, missing/duplicate checks, visual EDA, categorical encoding, BMI categories, standardization, Pearson correlation, and chi-square tests over charge quartiles.
+---
 
-## Analysis flow
+## ✨ Project snapshot
+
+| | |
+|---|---|
+| **Question** | How do age, BMI, smoking status, family size, sex, and region relate to insurance charges? |
+| **Data** | 1,338 rows · 7 columns |
+| **Target** | `charges` — a continuous cost measure |
+| **Tools** | Python · pandas · seaborn · Matplotlib · SciPy · scikit-learn |
+| **Best place to start** | [Open the analysis notebook](medical_insurance_cost_analysis.ipynb) |
+
+## 📊 Take a visual tour
+
+The charts below are exported from the notebook’s saved outputs, so they’re easy to preview without running any code.
+
+| Insurance charge distribution | Charges by smoking status |
+|---|---|
+| ![Distribution of insurance charges](images/charges_distribution.png) | ![Count of records by smoking status](images/smoker_counts.png) |
+
+| Numeric feature correlations | Charge outliers and spread |
+|---|---|
+| ![Correlation heatmap for numeric variables](images/numeric_correlation_heatmap.png) | ![Boxplot of insurance charges](images/charges_boxplot.png) |
+
+| BMI distribution before feature engineering | BMI distribution after cleaning |
+|---|---|
+| ![BMI distribution before cleaning](images/bmi_distribution.png) | ![BMI distribution after cleaning](images/bmi_distribution_after_cleaning.png) |
+
+<details>
+<summary><strong>See all saved notebook charts</strong></summary>
+
+### Distributions
+
+| Age | BMI | Children | Charges |
+|---|---|---|---|
+| ![Age distribution](images/age_distribution.png) | ![BMI distribution](images/bmi_distribution.png) | ![Children distribution](images/children_distribution.png) | ![Charges distribution](images/charges_distribution.png) |
+
+### Category counts
+
+| Sex | Smoker | Children | Region |
+|---|---|---|---|
+| ![Sex counts](images/sex_counts.png) | ![Smoker counts](images/smoker_counts.png) | ![Children counts](images/children_counts.png) | ![Region counts](images/region_counts.png) |
+
+### Boxplots
+
+| Age | BMI | Children | Charges |
+|---|---|---|---|
+| ![Age boxplot](images/age_boxplot.png) | ![BMI boxplot](images/bmi_boxplot.png) | ![Children boxplot](images/children_boxplot.png) | ![Charges boxplot](images/charges_boxplot.png) |
+
+</details>
+
+## 🧭 How the analysis flows
 
 ```mermaid
 flowchart LR
-    A[insurance.csv<br/>1,338 rows · 7 columns] --> B[Explore<br/>summaries · plots · data quality]
-    B --> C[Prepare data<br/>remove duplicate · encode categories]
-    C --> D[Engineer features<br/>BMI categories · one-hot columns]
-    D --> E[Scale selected inputs<br/>age · BMI · children]
-    E --> F[Explore feature relationships<br/>Pearson correlation · chi-square]
-    F --> G[Current endpoint<br/>feature analysis]
-    G -. Future work .-> H[Train and evaluate a regression model]
+    A[insurance.csv<br/>1,338 records] --> B[Explore<br/>summaries · charts · data quality]
+    B --> C[Clean<br/>remove duplicate · check missing values]
+    C --> D[Prepare categories<br/>binary maps · region one-hot encoding]
+    D --> E[Engineer features<br/>BMI groups]
+    E --> F[Scale numeric inputs]
+    F --> G[Study relationships<br/>correlation · chi-square]
+    G --> H[Analysis notebook]
 ```
 
-## Repository contents
+## 🔎 What stood out
 
-| File | Description |
-|---|---|
-| `medical_insurance_cost_analysis.ipynb` | Notebook with the EDA, preprocessing steps, analysis notes, and saved chart outputs. |
-| `insurance.csv` | Dataset used by the notebook. It stays at the repository root so the notebook's existing `pd.read_csv('insurance.csv')` cell works when launched from this directory. |
-| `requirements.txt` | Python packages used by the notebook. |
-| `.gitignore` | Python and Jupyter-generated files excluded from Git. |
+- The source file contains **1,338 records** and has no missing values; the notebook removes one duplicate during cleaning.
+- The charge histogram has a long right tail: most observations are lower, with fewer very high charges.
+- In the notebook’s Pearson analysis, smoking status has the strongest listed association with charges (**r ≈ 0.787**), followed by age (**r ≈ 0.298**) and BMI (**r ≈ 0.196**).
+- These are exploratory relationships in this dataset. They do not show that a feature causes higher charges.
 
-## Run it locally
+## 🧪 What’s inside the notebook
 
-Use Python 3.10 or newer.
+The notebook walks through:
+
+1. Dataset shape, types, summary statistics, and missing-value checks
+2. Histograms, category counts, boxplots, and a numeric correlation heatmap
+3. Duplicate removal and categorical encoding
+4. BMI grouping and one-hot encoding
+5. Standard scaling for selected numeric features
+6. Pearson correlation and chi-square feature exploration
+
+The project is an **EDA and feature-preparation study**. It focuses on understanding the data and does not present a trained prediction model or test-set score.
+
+> **Preprocessing note:** One notebook step converts the full cleaned dataframe to integers. That truncates decimal BMI and charge values; keep this in mind when interpreting later statistics or reusing the transformed data.
+
+## 🚀 Run it yourself
+
+Clone or download this repository, then from its root:
 
 ```bash
 python -m venv .venv
 ```
 
-Activate the environment, then install the dependencies and launch Jupyter:
+Activate the environment and install the packages:
 
 ```bash
 python -m pip install -r requirements.txt
+```
+
+Launch the notebook:
+
+```bash
 jupyter notebook medical_insurance_cost_analysis.ipynb
 ```
 
-Run the notebook with the repository root as the working directory so it can find `insurance.csv`.
+The CSV is kept beside the notebook, so its existing `pd.read_csv("insurance.csv")` cell works when Jupyter starts from the repository root.
 
-## What the notebook currently finds
+## 🗂️ Repository map
 
-- The source CSV has no missing values; duplicate removal leaves 1,337 rows.
-- In the notebook's Pearson analysis, smoking status has the strongest listed linear association with charges (about **0.787**), followed by age (about **0.298**) and BMI (about **0.196**).
-- These are exploratory associations, not causal conclusions or evidence of predictive performance.
+```text
+.
+├── images/                              # chart exports shown above
+├── insurance.csv                        # analysis dataset
+├── medical_insurance_cost_analysis.ipynb # full notebook and saved outputs
+├── requirements.txt
+└── README.md
+```
 
-## Current scope and limitations
+## 📚 Dataset
 
-- The work focuses on exploring and preparing the data; it does **not** train a regression model or report test-set performance.
-- The notebook converts the entire cleaned dataframe to integers before scaling. This truncates decimal values, including BMI and the charge target, and should be reviewed before using the prepared data in a model.
-- Statistical tests and feature selection here are exploratory. They do not replace validation on held-out data.
-- The original dataset source and license were not documented in the files provided with this project. Verify and add the upstream dataset attribution and terms if you know the source.
-
-## Dataset fields
-
-| Field | Meaning |
-|---|---|
-| `age` | Age of the individual |
-| `sex` | Recorded sex category |
-| `bmi` | Body mass index |
-| `children` | Number of children / dependents |
-| `smoker` | Smoking status |
-| `region` | Residential region category |
-| `charges` | Medical insurance charges; continuous analysis target |
-
-## Images and charts
-
+The data matches the [Medical Cost Personal Datasets on Kaggle](https://www.kaggle.com/datasets/mirichoi0218/insurance). It contains age, sex, BMI, number of dependents, smoking status, region, and individual insurance charges.
