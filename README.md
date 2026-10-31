@@ -78,8 +78,3 @@ Run the notebook with the repository root as the working directory so it can fin
 
 ## Images and charts
 
-There are no standalone image files in the supplied project folder. The notebook contains saved visualization outputs, which are visible when browsing the notebook on GitHub and when running it locally.
-
-## License
-
-No project license is included. The dataset's original source and reuse terms were not present in the supplied files, so check those terms before redistributing the CSV elsewhere.
