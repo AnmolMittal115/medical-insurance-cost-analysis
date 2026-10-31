@@ -32,9 +32,9 @@ The charts below are exported from the notebook’s saved outputs, so they’re 
 |---|---|
 | ![Correlation heatmap for numeric variables](images/numeric_correlation_heatmap.png) | ![Boxplot of insurance charges](images/charges_boxplot.png) |
 
-| BMI distribution before feature engineering | BMI distribution after cleaning |
+| BMI distribution before feature engineering | BMI distribution after duplicate removal |
 |---|---|
-| ![BMI distribution before cleaning](images/bmi_distribution.png) | ![BMI distribution after cleaning](images/bmi_distribution_after_cleaning.png) |
+| ![BMI distribution before cleaning](images/bmi_distribution.png) | ![BMI distribution after duplicate removal](images/bmi_distribution_after_cleaning.png) |
 
 <details>
 <summary><strong>See all saved notebook charts</strong></summary>
@@ -76,7 +76,7 @@ flowchart LR
 
 - The source file contains **1,338 records** and has no missing values; the notebook removes one duplicate during cleaning.
 - The charge histogram has a long right tail: most observations are lower, with fewer very high charges.
-- In the notebook’s Pearson analysis, smoking status has the strongest listed association with charges (**r ≈ 0.787**), followed by age (**r ≈ 0.298**) and BMI (**r ≈ 0.196**).
+- In the notebook’s Pearson analysis, smoking status has the strongest listed association with charges (**r ≈ 0.787**), followed by age (**r ≈ 0.298**) and BMI (**r ≈ 0.198**).
 - These are exploratory relationships in this dataset. They do not show that a feature causes higher charges.
 
 ## 🧪 What’s inside the notebook
@@ -92,7 +92,7 @@ The notebook walks through:
 
 The project is an **EDA and feature-preparation study**. It focuses on understanding the data and does not present a trained prediction model or test-set score.
 
-> **Preprocessing note:** One notebook step converts the full cleaned dataframe to integers. That truncates decimal BMI and charge values; keep this in mind when interpreting later statistics or reusing the transformed data.
+> **Preprocessing note:** Boolean one-hot columns are converted to 0/1 flags; continuous BMI and charge values retain their decimal precision.
 
 ## 🚀 Run it yourself
 
